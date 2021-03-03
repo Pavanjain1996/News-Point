@@ -6,6 +6,7 @@ app = Flask(__name__)
 
 @app.route('/')
 def index():
+    k = 1
     url = 'https://www.bbc.com/news'
     query = requests.get(url)
     htmlcontent = query.content
@@ -15,7 +16,8 @@ def index():
     links = soup.find_all('a', class_='gs-c-promo-heading gs-o-faux-block-link__overlay-link gel-pica-bold nw-o-link-split__anchor')
     content_to_send=[]
     for i in range(3):
-        content_to_send.append([i+1,h3[i].get_text(),para[i+2].get_text(),'https://www.bbc.com'+links[i].get('href')])
+        content_to_send.append([k,h3[i].get_text(),para[i+2].get_text(),'https://www.bbc.com'+links[i].get('href')])
+        k=k+1
     return render_template('index.html', content=content_to_send)
 
 if __name__=='__main__':
