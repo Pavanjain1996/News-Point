@@ -15,7 +15,7 @@ def index():
     links = soup.find_all('a', class_='gs-c-promo-heading gs-o-faux-block-link__overlay-link gel-pica-bold nw-o-link-split__anchor')
     content_to_send=[]
     for i in range(3):
-        content_to_send.append([h3[i].get_text(),para[i+2].get_text(),'https://www.bbc.com/news'+links[i].get('href')])
+        content_to_send.append([i+1,h3[i].get_text(),para[i+2].get_text(),'https://www.bbc.com'+links[i].get('href')])
     return render_template('index.html', content=content_to_send)
 
 if __name__=='__main__':
