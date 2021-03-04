@@ -22,7 +22,7 @@ class Article(db.Model):
 #Url Routes
 @app.route('/')
 def index():
-    content = Article.query.order_by(Article.id.desc()).limit(10).all()
+    content = Article.query.order_by(Article.id.desc()).limit(15).all()
     return render_template('index.html', content=content)
 
 #Launching App
