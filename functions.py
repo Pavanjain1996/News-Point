@@ -12,16 +12,20 @@ def fetchHTML(url):
     return soup
 
 #This function will push data into database
+# heading - tags
+# image_url - url
+# content - tags
+# redirect_url - url
 def pushData(headline, image_url, content, redirect_url, data_from):
     for i in range(len(headline)):
         article = Article.query.filter_by(headline=headline[i].get_text()).all()
         if article:
-            print('Article Exists')
+            print('Article from',data_from,'Exists')
         else:
             article = Article(headline=headline[i].get_text(),image_url=image_url[i],content=content[i].get_text(),redirect_url=redirect_url[i],data_from=data_from)
             db.session.add(article)
             db.session.commit()
-            print('Article Posted')
+            print('Article Posted from', data_from)
 
 #This function will filter the data from html data of BBC website
 def bbcNews():
@@ -29,6 +33,7 @@ def bbcNews():
     headline = soup.find_all('h3', class_='gs-c-promo-heading__title gel-pica-bold nw-o-link-split__text')
     content = soup.find_all('p', class_='gs-c-promo-summary gel-long-primer gs-u-mt nw-c-promo-summary')
     redirect_url = soup.find_all('a', class_='gs-c-promo-heading gs-o-faux-block-link__overlay-link gel-pica-bold nw-o-link-split__anchor')
+    redirect_url = ['https://www.bbc.com'+x.get('href') for x in redirect_url]
     image_url = soup.find_all('div', class_='gs-o-responsive-image gs-o-responsive-image--16by9')
     for i in range(len(image_url)):
         t = image_url[i].findChild().get('data-src')
