@@ -17,7 +17,7 @@ class Article(db.Model):
     data_from = db.Column(db.String(200), nullable=False)
 
     def __repr__(self):
-        return self.headline
+        return str(self.id)+'. '+self.headline
 
 #Url Routes
 @app.route('/')
