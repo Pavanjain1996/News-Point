@@ -19,21 +19,21 @@
             {% for i in content %}
             <div class="col-md-12">
                 <p>
-                    <button class="btn btn-primary" type="button" data-bs-toggle="collapse" data-bs-target="#collapseExample{{i[0]}}" aria-expanded="false" aria-controls="collapseExample{{i[0]}}" style="width:100%;">
-                      {{i[1]}}
+                    <button class="btn btn-primary" type="button" data-bs-toggle="collapse" data-bs-target="#collapseExample{{i.id}}" aria-expanded="false" aria-controls="collapseExample{{i.id}}" style="width:100%;">
+                      {{i.headline}}
                     </button>
                   </p>
-                  <div class="collapse" id="collapseExample{{i[0]}}">
+                  <div class="collapse" id="collapseExample{{i.id}}">
                     <div class="card card-body" style="text-align:center;">
                       <div class="container-fluid">
                         <div class="row">
                           <div class="col-md-4">
-                            <img src="{{i[4]}}" width="100%"/>
+                            <img src="{{i.image_url}}" width="100%"/>
                           </div>
                         <div class="col-md-8">
-                          {{i[2]}}<br/>
-                          <a href="{{i[3]}}" class="btn btn-link" target="_blank">Click here to know more</a><br/>
-                          Data From : {{i[5]}}
+                          {{i.content}}<br/>
+                          <a href="{{i.redirect_url}}" class="btn btn-link" target="_blank">Click here to know more</a><br/>
+                          Data From : {{i.data_from}}
                         </div>
                       </div>
                       </div>
