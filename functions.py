@@ -52,10 +52,32 @@ def cnnNews():
     image_url = [ x.findChild().findChild().findChild().get('src') for x in image_url]
     pushData(headline[:2], image_url[:2], content[:2], redirect_url[:2], 'CNN News')
 
+#This function will filter the data from html data of aajtak Website
+def aajtak():
+    soup = fetchHTML('https://www.aajtak.in/')
+    soup = soup.find_all('div', class_='hhm-stoy-left-body')
+    headline = [soup[0].findChildren()[2]]
+    image_url = [soup[0].findChildren()[4].get('src')]
+    content = [soup[0].findChildren()[6]]
+    redirect_url = [soup[0].findChildren()[0].get('href')]
+    pushData(headline, image_url, content, redirect_url, 'AajTak News')
+
+#This function will filter the data from html data of aajtak Website
+def indiaTV():
+    soup = fetchHTML('https://www.indiatvnews.com/')
+    soup = soup.find_all('li', class_='eventTracking')
+    headline = [i.find_all('h2')[0] for i in soup]
+    image_url = [i.find_all('img')[0].get('data-original') for i in soup]
+    content = [i.find_all('h2')[0] for i in soup]
+    redirect_url = [i.find_all('a')[0].get('href') for i in soup]
+    pushData(headline, image_url, content, redirect_url, 'indiaTV News')
+
 #Throwing Everything into database
 def setDatabase():
     bbcNews()
     cnnNews()
+    aajtak()
+    indiaTV()
 
 #Launching
 setDatabase()
