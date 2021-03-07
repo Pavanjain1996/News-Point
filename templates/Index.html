@@ -10,12 +10,17 @@
               <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
               </button>
+              <form class="d-flex" method="get" action="/search">
+                <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" name="search" id="search">
+                <button class="btn btn-outline-success" type="submit">Search</button>
+              </form>
               </div>
             </div>
           </nav>
           <br/>
           <div class="container">
               <div class="row">
+            {% if content is not none %}
             {% for i in content %}
             <div class="col-md-12">
                 <p>
@@ -41,7 +46,10 @@
                   </div>
                   <br/>
               </div>
-            {% endfor %}                  
+            {% endfor %}
+            {% else %}
+            <div class="col" style="text-align: center;"><h1>No Articles Found</h1><a href="/" class="btn btn-link">Go to home</a></div>
+            {% endif %}
         </div>
     </div>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/js/bootstrap.bundle.min.js" integrity="sha384-b5kHyXgcpbZJO/tY9Ul7kGkf1S0CWuKcCD38l8YkeH8z8QjE0GmW1gYU5S9FOnJ0" crossorigin="anonymous"></script>

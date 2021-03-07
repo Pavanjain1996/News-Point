@@ -1,6 +1,7 @@
 #importing modules
-from flask import Flask, render_template
+from flask import Flask, render_template, request
 from flask_sqlalchemy import SQLAlchemy
+from sqlalchemy import or_
 
 #creating and configuring app
 app = Flask(__name__)
@@ -23,6 +24,14 @@ class Article(db.Model):
 @app.route('/')
 def index():
     content = Article.query.order_by(Article.id.desc()).limit(15).all()
+    return render_template('index.html', content=content)
+
+@app.route('/search')
+def search():
+    search = request.args.get('search')
+    content = Article.query.filter(or_(Article.headline.contains(search), Article.headline.contains(search.capitalize()))).all()
+    if len(content)==0:
+        content = None
     return render_template('index.html', content=content)
 
 #Launching App
