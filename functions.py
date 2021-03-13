@@ -78,6 +78,7 @@ def setDatabase():
     cnnNews()
     aajtak()
     indiaTV()
+    input()
 
 #Launching
 setDatabase()
