@@ -12,7 +12,7 @@ def fetchHTML(url):
     return soup
 
 #This function will push data into database
-# heading - tags
+# headline - tags
 # image_url - url
 # content - tags
 # redirect_url - url
@@ -72,12 +72,23 @@ def indiaTV():
     redirect_url = [i.find_all('a')[0].get('href') for i in soup]
     pushData(headline, image_url, content, redirect_url, 'indiaTV News')
 
+def ABPNews():
+    soup = fetchHTML('https://www.abplive.com/')
+    soup = soup.find_all('div',class_='left_section position-static')[0]
+    soup = soup.find_all('a')[1:]
+    headline = [ x.find('p') for x in soup ]
+    image_url = [ x.find('img').get('data-src') for x in soup ]
+    content = headline
+    redirect_url = [ x.get('href') for x in soup ]
+    pushData(headline, image_url, content, redirect_url, 'ABP News')
+
 #Throwing Everything into database
 def setDatabase():
     bbcNews()
     cnnNews()
     aajtak()
     indiaTV()
+    ABPNews()
     input()
 
 #Launching
