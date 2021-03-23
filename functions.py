@@ -35,7 +35,7 @@ def bbcNews():
     redirect_url = soup.find_all('a', class_='gs-c-promo-heading gs-o-faux-block-link__overlay-link gel-pica-bold nw-o-link-split__anchor')
     redirect_url = ['https://www.bbc.com'+x.get('href') for x in redirect_url]
     image_url = soup.find_all('div', class_='gs-o-responsive-image gs-o-responsive-image--16by9')
-    for i in range(len(image_url)):
+    for i in range(4):
         t = image_url[i].findChild().get('data-src')
         image_url[i] = t[:30] + '600' + t[37:]
     pushData(headline[:4], image_url[:4], content[2:6], redirect_url[:4], 'BBC News')
